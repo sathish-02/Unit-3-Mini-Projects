@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Learning</title>
+    <style>
+         .container{
+            width: 60%;
+            border: 1px solid transparent;
+            margin: auto;
+            text-align: center;
+            margin-top: 40px;
+        }
+        button {
+            width: 70%;
+            padding: 10px 40px;
+            background-color: transparent;
+            border-radius: 15px;
+            color: red;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: royalblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <button id = "Objects" onclick="object()">Objects</button>
+        <p id="OB"></p>
+        <button id = "Arrays" onclick="arrays()">Arrays</button>
+        <p id="AR"></p>
+        <button id = "Functions" onclick="functions()">Functions</button>
+        <p id="FN"></p>
+        <button id = "Strings" onclick="strings()">Strings</button>
+        <p id="STR"></p>
+        <button id = "Numbers" onclick="number()">Numbers</button>
+        <p id="NUM"></p>
+        <button id = "Null" onclick="Null()">Null</button>
+        <p id="NULL"></p>
+        <button id = "Undefined" onclick="Undefined()">Undefined</button>
+        <p id="UND"></p>
+    </div>
+</body>
+</html>
+
+<script>
+
+    function object(){
+     
+    let unList = document.createElement("ul");
+    let li = document.createElement("li");
+    let li1 = document.createElement("li");
+    let li2 = document.createElement("li");
+    let li3 = document.createElement("li");
+    let li4 = document.createElement("li");
+    let li5 = document.createElement("li");
+    let li6 = document.createElement("li");
+    let li7 = document.createElement("li");
+    let li8 = document.createElement("li");
+    let li9 = document.createElement("li");
+ 
+    li.textContent="In JavaScript, almost everything is an object"
+    li1.textContent="Booleans can be objects (if defined with the new keyword)"
+    li2.textContent="Numbers can be objects (if defined with the new keyword)"
+    li3.textContent="Strings can be objects (if defined with the new keyword)"
+    li4.textContent="Dates are always objects"
+    li5.textContent="Maths are always objects"
+    li6.textContent="Regular expressions are always objects"
+    li7.textContent="Arrays are always objects"
+    li8.textContent="Functions are always objects"
+    li9.textContent="Objects are always objects"
+
+    unList.append(li,li1,li2,li3,li4,li5,li6,li7,li8,li9);
+    document.querySelector("#OB").append(unList);
+    }
+
+    function arrays(){
+       
+        let unList = document.createElement("ul");
+    let li = document.createElement("li");
+ 
+    li.textContent="Arrays are list-like objects whose prototype has methods to perform traversal and mutation operations. Neither the length of a JavaScript array nor the types of its elements are fixed. Since an array's length can change at any time, and data can be stored at non-contiguous locations in the array, JavaScript arrays are not guaranteed to be dense; this depends on how the programmer chooses to use them. In general, these are convenient characteristics; but if these features are not desirable for your particular use, you might consider using typed arrays."
+
+    unList.append(li);
+    document.querySelector("#AR").append(unList);
+    }
+
+    function functions(){
+        let unList = document.createElement("ul");
+    let li = document.createElement("li");
+ 
+    li.textContent="Functions are one of the fundamental building blocks in JavaScript. A function in JavaScript is similar to a procedure—a set of statements that performs a task or calculates a value, but for a procedure to qualify as a function, it should take some input and return an output where there is some obvious relationship between the input and the output. To use a function, you must define it somewhere in the scope from which you wish to call it."
+
+    unList.append(li);
+    document.querySelector("#FN").append(unList);
+    }
+
+    function strings(){
+        let unList = document.createElement("ul");
+    let li = document.createElement("li");
+ 
+    li.textContent="Strings is a primitive data type, It is a collection of character"
+
+    unList.append(li);
+    document.querySelector("#STR").append(unList);
+    }
+
+    function number(){
+        let unList = document.createElement("ul");
+    let li = document.createElement("li");
+ 
+    li.textContent="Number is a primitive data type."
+
+    unList.append(li);
+    document.querySelector("#NUM").append(unList);
+    }
+    
+    function Null(){
+        let unList = document.createElement("ul");
+    let li = document.createElement("li");
+ 
+    li.textContent="JavaScript null is a primitive type that contains a special value null . JavaScript uses the null value to represent the intentional absence of any object value"
+
+    unList.append(li);
+    document.querySelector("#NULL").append(unList);
+    }
+   
+    function Undefined(){
+        let unList = document.createElement("ul");
+    let li = document.createElement("li");
+ 
+    li.textContent="undefined is a property of the global object. That is, it is a variable in global scope. ... A variable that has not been assigned a value is of type undefined "
+
+    unList.append(li);
+    document.querySelector("#UND").append(unList);
+    }
+</script>

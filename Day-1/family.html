@@ -1,0 +1,40 @@
+
+<script>
+    var grandParents = {
+    maternal_gFather : "Ram",
+    maternal_gMother : "Kayal",
+    paternal_gFather : "mahesh",
+    paternal_gMother : "vasantha",
+}
+var parents = Object.create(grandParents);
+parents.father = "Balan";
+parents.mother = "Mohana";
+
+
+var childrens = Object.create(parents);
+childrens.son = "sathish";
+childrens.daughter = "Tharani"
+
+console.log(childrens);
+
+function blood_relatives(n,m,o,p){
+    this.maternal_gFather = n;
+    this.maternal_gMother = m;
+    this.paternal_gFather = o;
+    this.paternal_gMother = p;
+}
+
+var GrandParents = new blood_relatives("Ram","Kayal","Mahesh","Vasantha");
+
+var Parents = Object.create(GrandParents);
+Parents.father="Mohan";
+Parents.mother = "Balan";
+
+var Childrens = Object.create(Parents);
+Childrens.son = "sathish";
+Childrens.daughter = "Tharani"
+
+console.log(Childrens);
+
+
+</script>

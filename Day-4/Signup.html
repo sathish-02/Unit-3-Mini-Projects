@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Signup</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        #container {
+            width: 30%;
+            border: 1px solid black;
+            margin: auto;
+            margin-top: 7%;
+            background-color: rgb(170, 166, 166);
+            border-radius: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        label {
+            width: 100%;
+            font-size: 25px;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+        input {
+            width: 85%;
+            margin: 2%;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-right: 2%;
+        }
+        #SubmitBtn {
+            border-radius: 50px;
+            width: 40%;
+            padding: 10px 20px;
+            font-size: 15px;
+        }
+        #SubmitBtn:hover {
+        color: white;
+        background-color: blue;
+        cursor: pointer;
+        }
+
+        @media only screen and (min-width: 375px) and (max-width: 768px){
+            #container {
+            width: 65%;
+            margin-top: 15%;
+        }
+
+        label {
+            width: 100%;
+            font-size: 25px;
+            margin-left: 2%;
+        }
+        input {
+            width: 85%;
+            margin: 2%;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        } 
+
+        @media only screen and (min-width: 0px) and (max-width: 375px){
+            #container {
+            width: 95%;
+            margin-top: 15%;
+        }
+        } 
+
+    </style>
+</head>
+<body>
+    <form id="container">
+        <label>Name</label>
+        <input id="name" type="text">
+        <label>Mobile Number</label>
+        <input id="Mnum" type="number">
+        <label>Email Id</label>
+        <input id="Email"type="text">
+        <label>Password</label>
+        <input id="Password" type="password">
+        <input id= "SubmitBtn" type="submit">
+    </form>
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit", SignupDetails);
+
+    var SignupDatas = JSON.parse(localStorage.getItem("SignupDatas"))||[]
+
+    function SignupDetails(el){
+        el.preventDefault();
+        var name = document.querySelector("#name").value;
+        var Mobilenumber = document.querySelector("#Mnum").value;
+        var email = document.querySelector("#Email").value;
+        var password = document.querySelector("#Password").value;
+
+        function SignupDetails(n,m,o,p){
+            this.name = n;
+            this.MobileNumber = m;
+            this.Email = o;
+            this.Password = p;
+        }
+
+        var datas = new SignupDetails(name,Mobilenumber,email,password);
+        SignupDatas.push(datas);
+        localStorage.setItem("SignupDatas", JSON.stringify(SignupDatas));
+        
+        alert("Sucessfully signed up")
+        window.location.href="login.html"
+
+    }
+
+
+</script>

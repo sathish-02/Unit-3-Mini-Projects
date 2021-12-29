@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Home</title>
+    <style>
+       body {
+           background-color: black;
+       }
+       .nav {
+           width: 100%;
+           height: 60px;
+           border: 1px solid transparent;
+           margin: auto;
+           border-radius: 5px;
+           background-color: rgb(97, 91, 91);
+           display: flex;
+           justify-content: space-between;
+       }
+
+       .nav > #ls {
+        border: 1px solid transparent;
+        height: 95%;
+        width: 30%;
+        text-align: left;
+        font-size: 35px;
+        margin-top: 1px;
+        align-content: center;
+       }
+
+       #ls {
+           color: white;
+       }
+       .nav > #rs {
+        border: 1px solid transparent;
+        height: 95%;
+        width: 40%;
+        text-align: left;
+        font-size: 35px;
+        margin-top: 1px;
+        align-content: center;
+        display: flex;
+        justify-content: space-around;
+       }
+
+       a {
+        font-size: 25px;
+        margin-top: 1.5%;
+        text-decoration: none;
+        color: white;
+       }
+
+       #mainH {
+           width: 90%;
+           margin: auto;
+           border: 1px solid transparent;
+           text-align: center;
+       }
+       h1 {
+           color: white;
+       }
+
+       #SlideShowCont {
+             width: 98%;
+            margin: auto;
+            border: 1px solid transparent;
+            text-align: center;
+            height: 400px;
+            
+       }
+
+       #slide {
+           width: 100%;
+           height: 100%;
+           border-radius: 20px;
+       }
+
+       #filters {
+           width: 98%;
+           height: 60px;
+           border: 1px solid transparent;
+           margin: auto;
+           margin-top: 10px;
+       }
+       label {
+            width: 100%;
+            font-size: 25px;
+            margin-left: 2%;
+            color: white;
+        }
+
+        #rating {
+            padding: 10px,40px;
+        }
+
+        .selectBtn {
+            padding: 10px 15px;
+            margin-right: 2%;
+            font-size: 18px;
+            border-radius: 10px;
+            background-color: none;
+            margin-top: 5px;
+
+        }
+
+        #display {
+            width: 98%;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            border: 1px solid black;
+            grid-gap: 20px;
+            padding: 20px;
+            margin: auto;
+           
+        }
+
+        #Dimage {
+            width: 100%;
+            height: 70%;
+            border-radius: 20px;
+        }
+
+        #Dname {
+            color: white;
+        }
+
+        #Drelease {
+            color: white;
+        }
+
+        #Drating {
+            color: white;
+        }
+        #Dlang {
+            color: white;
+        }
+
+       @media only screen and (min-width: 375px) and (max-width: 768px){
+        .nav > #ls {
+        height: 95%;
+        width: 50%;
+        text-align: left;
+        font-size: 35px;
+        margin-top: 1px;
+        align-content: center;
+       }
+       #display {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+           
+        }
+    }
+
+    @media only screen and (min-width: 0px) and (max-width: 375px){
+        
+        .nav > #ls {
+        width: 40%;
+        text-align: left;
+        align-content: center;
+        font-size: 25px;
+        
+       }
+       #ls {
+           color: white;
+       }
+       .nav > #rs {
+            width: 50%;
+            display: flex;
+            justify-content: space-around;
+       }
+      #rs {
+          color: black;
+      }
+      a {
+        font-size: 17px;
+        margin-top: 1.5%;
+        text-decoration: none;
+        color: white;
+       }
+
+       #mainH {
+           width: 100%;
+           margin: auto;
+           border: 1px solid transparent;
+           text-align: center;
+       }
+
+       #display {
+            display: grid;
+            grid-template-columns: repeat(1,1fr);
+            padding: 0%;
+           
+        }
+       
+        } 
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div id="ls">Book Tickets</div>
+        <div id="rs">
+            <a href="">Home</a>
+            <a href="Signup.html">Login</a>
+            <a href="">Signin</a>
+        </div>
+    </div>
+
+    <div id="mainH"><h1>****Latest Movies****</h1></div>
+
+    <div id="SlideShowCont">
+        
+    </div>
+    <div id="filters">
+        <label>Filters : </label>
+        <select name="" id="rating" class="selectBtn" onchange="sortRating()">
+            <option value="">Rating</option>
+            <option value="High">High To Low</option>
+            <option value="Low">Low To High</option>
+        </select>
+ 
+    <div id="display">
+
+    </div>
+    
+</body>
+</html>
+
+<script> 
+
+var moviesDatas = [
+    {
+        name : "Spider-Man: No Way Home",
+        img : "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/spider-man-no-way-home-et00310790-07-12-2021-07-25-42.jpg",
+        poster : "https://img.ticketnew.com/tn/offer_banner/spiderman_noway/1920_400_4.jpg",
+        rating : 8.9,
+        release : "Dec-15-2021",
+        language : "English",
+    },
+
+    {
+        name : "Pushpa",
+        img : "https://img.ticketnew.com/tn/movie/23961/6.jpg?7713348&x-oss-process=image/resize,m_mfit,h_320/quality,q_80",
+        poster : "https://img.ticketnew.com/tn/offer_banner/pushpa/1920_400_1.jpg",
+        rating : 7.0,
+        release : "Dec-17-2021",
+        language : "Telugu",
+    },
+
+    {
+        name : "Shyam Singha Roy (U/A) - Telugu",
+        img : "https://img.ticketnew.com/tn/movie/23996/6.jpg?7167926&x-oss-process=image/resize,m_mfit,h_320/quality,q_80",
+        poster : "https://img.ticketnew.com/tn/offer_banner/shyam/1920_400_2.jpg",
+        rating : 6.0,
+        release : "Dec-17-2021",
+        language : "Telugu",
+    },
+
+    {
+        name : "83",
+        img : "https://img.ticketnew.com/tn/movie/23996/6.jpg?7167926&x-oss-process=image/resize,m_mfit,h_320/quality,q_80",
+        poster : "https://img.ticketnew.com/tn/offer_banner/83/1920_400.jpg",
+        rating : 6.6,
+        release : "Dec-24-2021",
+        language : "Hindi",
+    },
+    {
+        name : "Writer (U/A) - Tamil",
+        img : "https://img.ticketnew.com/tn/movie/24037/6.jpg?3866778&x-oss-process=image/resize,m_mfit,h_320/quality,q_80",
+        poster : "https://img.ticketnew.com/tn/offer_banner/writer/1920_400_1.jpg",
+        rating : 7.0,
+        release : "Dec-24-2021",
+        language : "Tamil",
+    },
+
+    {
+        name : "Thanne Vandi",
+        img : "https://img.ticketnew.com/tn/movie/24073/6.jpg?6604858&x-oss-process=image/resize,m_mfit,h_320/quality,q_80",
+        poster : "https://img.ticketnew.com/tn/offer_banner/thanni/1920_400.jpg",
+        rating : 7.0,
+        release : "Dec-31-2021",
+        language : "Tamil",
+    },
+    {
+        name : "Rocky (A) - Tamil",
+        img : "https://img.ticketnew.com/tn/movie/24033/6.jpg?9913351&x-oss-process=image/resize,m_mfit,h_320/quality,q_80",
+        rating : 8.0,
+        release : "Dec-31-2021",
+        poster : "https://img.ticketnew.com/tn/offer_banner/pushpa/1920_400_1.jpg",
+        language : "Tamil",
+    },
+    {
+        name : "Venom: Let There Be Carnage",
+        img : "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/venom-let-there-be-carnage-et00122532-25-12-2021-10-10-53.jpg",
+        rating : 8.2,
+        release : "Oct-14-2021",
+        poster : "https://img.ticketnew.com/tn/offer_banner/thanni/1920_400.jpg",
+        language : "English",
+    },
+
+];
+
+    //console.log(moviesDatas)
+
+    var image = document.createElement("img");
+    image.setAttribute("id", "slide")
+    image.src = moviesDatas[0].poster;
+    document.querySelector("#SlideShowCont").append(image);
+        let i = 1;
+    setInterval(function (){
+        if (i == moviesDatas.length){
+            i = 1;
+        }
+        image.src = moviesDatas[i].poster;
+        document.querySelector("#SlideShowCont").append(image);
+        i++;
+    },2000)
+    localStorage.setItem("MoviesDatas", JSON.stringify(moviesDatas));
+   display(moviesDatas);
+
+function sortRating(){
+  var selected =  document.querySelector("#rating").value;
+
+  
+        if (selected == "High"){
+            moviesDatas.sort(function(a,b){
+            return b.rating - a.rating;
+            });
+            console.log(moviesDatas)
+        }
+        else if (selected == "Low"){
+            moviesDatas.sort(function(a,b){
+            return a.rating - b.rating;
+            });
+        }
+        display(moviesDatas)
+}
+
+
+function display(moviesDatas){
+    document.querySelector("#display").textContent = "";
+    moviesDatas.map(function (elem){
+        
+        var div = document.createElement("div");
+        var img = document.createElement("img");
+        img.setAttribute("id","Dimage");
+        img.src = elem.img;
+        var name = document.createElement("h2");
+        name.setAttribute("id","Dname");
+        name.textContent = elem.name;
+        var release = document.createElement("h3");
+        release.setAttribute("id","Drelease");
+        release.textContent= "Released Date :" + " " + elem.release;
+        var rating = document.createElement("p");
+        rating.setAttribute("id","Drating")
+        rating.textContent= "Rating :" + " " + elem.rating + "/10";
+        var language = document.createElement("p");
+        language.textContent = "Language :" + " " + elem.language;
+        language.setAttribute("id","Dlang")
+
+     
+        div.append(img,name,release,rating,language);
+        document.querySelector("#display").append(div);
+        
+
+    })
+}
+
+
+
+
+
+
+</script>

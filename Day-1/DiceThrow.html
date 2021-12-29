@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Dice Throw</title>
+    <style>
+        .container{
+            width: 50%;
+            height: 570px;
+            border: 1px solid black;
+            margin: auto;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .container {
+            background-image: url("https://images.unsplash.com/photo-1551431009-a802eeec77b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZGljZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+            background-size: cover;
+        }
+        .container > h2 {
+            margin-top: 65%;
+        }
+
+        button {
+            padding: 10px 40px;
+            background-color: transparent;
+            border-radius: 15px;
+            color: red;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: royalblue;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Wanna play click on this button</h2>
+        <button id="Btn" onclick="showNum()">Throw Dice</button>
+        <h3 id="Output"></h3>
+    </div>
+</body>
+</html>
+
+<script>
+function showNum(){
+   let output =Math.floor(Math.random() * 6)+1;
+   if (output == 1){
+    document.querySelector("#Output").textContent= output;
+    document.querySelector("#Output").style.color = "red"
+   }
+   else if ((output == 2)||(output == 3)||(output == 4)||(output == 5)){
+    document.querySelector("#Output").textContent= output;
+    document.querySelector("#Output").style.color = "blue"
+   }
+   else if (output == 6){
+    document.querySelector("#Output").textContent= output;
+    document.querySelector("#Output").style.color = "magenta"
+   }
+   
+}
+
+</script>

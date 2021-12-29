@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Todo list</title>
+    <style>
+        #container {
+            width: 80%;
+            border: 1px solid transparent;
+            margin: auto;
+            background-color: rgb(235, 158, 144);
+            border-radius: 10px;
+        }
+        #container > form {
+            border-bottom: 1px solid gray;
+            width: 95%;
+            height: 15%;
+            text-align: center;
+            margin: auto;
+        }
+        #Task, #submit {
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        #submit:hover {
+            cursor: pointer;
+            background-color: blue;
+            color: white;
+        }
+        #Output {
+            width: 70%;
+            margin: auto;
+            margin-top: 10px;
+        }
+        #container > Output {
+            border: 1px solid blue;
+            width: 100%;
+            }
+
+        th {
+            border: 1px solid gray;
+            font-size: 20px;
+            padding: 10px 30px;
+        }
+        td {
+            border: 1px solid gray;
+            font-size: 17px;
+            padding: 10px 30px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id= "container">
+        <form id= "Input">
+            <label><h2>Task :</h2> </label>
+            <input id="Task" type="text">
+            <input id="submit" type="submit">
+            
+        </form>
+        <div id="Output">
+            <table>
+                <thead>
+                    <th>Task</th>
+                    <th>Created Date</th>
+                    <th>status</th>
+                    <th>Done</th>
+                    <th>Remove</th>
+                    <th>Toggle</th>
+                </thead>
+                <tbody>
+      
+                </tbody>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+        document.querySelector("form").addEventListener("submit",addItems);//creating event for the form
+        var data = JSON.parse(localStorage.getItem("DATAS"))||[];// saving datas as array of objects
+
+       
+
+        function addItems(event){
+            event.preventDefault();//preventing default behavior
+            let input = document.querySelector("#Task").value;//getting value from the user
+            let OB = new createOb(input);//passing argument to the constructor function
+            let row = document.createElement("tr");//creating table row
+            let td1 = document.createElement("td");//creating table data
+            td1.textContent=OB.name;//assigning value to the table cell
+            let td2 = document.createElement("td");//creating table data
+            td2.textContent=OB.date;//assigning value to the table cell
+            let td3 = document.createElement("td");//creating table data
+            td3.textContent= OB.status;//assigning value to the table cell
+            let td4 = document.createElement("td");//creating table data
+            td4.textContent= "Done";//assigning value to the table cell
+            td4.addEventListener("click", function(event){
+                event.target.parentNode.style.backgroundColor = "green";//changing color to the row if this function is called
+                td1.style.textDecoration= "line-through";
+                td2.style.textDecoration= "line-through";
+                td3.style.textDecoration= "line-through";
+            })
+            let td5 = document.createElement("td");
+            td5.textContent= "Remove";
+            td5.addEventListener("click", function(event){
+                event.target.parentNode.remove(); 
+            });
+            let td6 = document.createElement("td");
+            td6.textContent= "Toggle";
+            td6.addEventListener("click", function(event){
+                td3.textContent="True";
+                td3.style.backgroundColor = "green";
+               
+            });
+
+            function createOb(input){//constructor function
+            this.name = input,
+            this.date = new Date();
+            this.status = "False";
+        }
+
+            
+            row.append(td1,td2,td3,td4,td5,td6);//append table datas to row
+            document.querySelector("tbody").append(row);//append row to body
+
+            data.push(OB);
+            localStorage.setItem("Datas",JSON.stringify(data))
+            
+        }
+
+</script>
