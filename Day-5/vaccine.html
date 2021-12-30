@@ -74,23 +74,28 @@
     localStorage.setItem("Vaccine", JSON.stringify(vaccineCount));
     function register(el){
         el.preventDefault();
+        document
         var name = document.querySelector("#name").value;
         namearr.push(name);
-        alert("Registered Successfully");
         localStorage.setItem("Namearr", JSON.stringify(namearr))
+        alert("Registered Successfully");
         
-
+        
+        alert("Pending")
         var myPromise = new Promise(function(resolve,reject){
             setTimeout(function (){
 
-                for (i = 0; i < namearr.length; i++){
-                if (namearr[i] === name){
+                for (let i = 0; i < namearr.length; i++){
+                if (namearr[i] === name && i < vaccineCount.length){
                     resolve("Please Enter into vaccination Room");
                 }
+                else {
+                    reject("vaccination out")
                 }
-                if (namearr[i] !== name){
-                    reject("please register")
                 }
+                // if (namearr !== name){
+                //     reject("please register")
+                // }
         
             },5000)
            

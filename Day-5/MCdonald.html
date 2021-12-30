@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <title>MC</title>
+       <style>
+           body {
+               background-color: black;
+           }
+           #nav {
+               width: 100%;
+               height: 80px;
+               border: 1px solid black;
+               margin: auto;
+               background-color: tan;
+               border-radius: 10px;
+                display: flex;
+                justify-content: space-between;
+           }
+
+           #nav > h1 {
+               margin-left: 10px;
+           }
+           #container {
+               margin-top: 10px;
+               display: grid;
+               grid-template-columns: (12,1fr);
+               border: 1px solid black;
+               grid-gap: 20px;
+               padding: 20px;
+               grid-template-areas: 
+               "a a a a b b b b b b b b";
+           }
+
+           #container > form:nth-child(1) {
+               border: 1px solid black;
+               grid-area: a;
+               background-color: burlywood;
+               border-radius: 10px;
+           }
+
+           #container > div:nth-child(2) {
+               border: 1px solid black;
+               grid-area: b;
+               background-color: burlywood;
+               border-radius: 10px;
+           }
+
+           label>h1 {
+               padding-left: 20px;
+           }
+
+           #Idnum {
+               margin-right: 20px;
+           }
+
+           input {
+                padding: 20px 30px;
+                margin-bottom: 15px;
+                margin-left: 20px;
+           }
+           span {
+               margin-left: 10px;
+           }
+           #onsubmit{
+               padding: 10px 20px;
+               font-size: 15px;
+               border-radius: 15px;
+           }
+
+           #onsubmit:hover{
+               cursor: pointer;
+               color: white;
+               background-color: blue;
+           }
+
+           #displayFoods > div>img{
+               width: 30%;
+                height: 30%;
+                margin: auto;
+                margin-left: 40%;
+                margin-top: 10px;
+           }
+           #displayFoods > div> h2,h3,p{
+                margin-left: 10px;
+                color: white;
+           }
+
+       </style>
+</head>
+<body>
+    <div id ="nav">
+        <h1>Order Food</h1>
+        <h1 id = "Idnum"></h1>
+    </div>
+    <div id="container">
+        <form>
+            <label><h1>Order Food Items</h1></label>
+            <input type="checkbox" name= "food" id= "checkbox" value="Triple Cheese American Veg Burger"><span>Triple Cheese American Veg Burger"</span>
+            <br>
+            <input type="checkbox" name= "food" id= "checkbox" value="Triple Cheese American Chicken Burger"><span>Triple Cheese American Chicken Burger</span>
+            <br>
+            <input type="checkbox" name= "food" id= "checkbox" value="Chicken Dominator Pizza"><span>Chicken Dominator Pizza</span>
+            <br>
+            <input type="checkbox" name= "food" id= "checkbox" value="Peppy Paneer Pizza"><span>Peppy Paneer Pizza</span>
+            <br>
+            <input type="checkbox" name= "food" id= "checkbox" value="Mingles Bucket Meal"><span>Mingles Bucket Meal</span>
+            <br>
+            <input id = "onsubmit" type="submit">
+        </form>
+        <div id="displayFoods"></div>
+    </div>
+</body>
+</html>
+
+
+<script>
+    var foods = [
+        {
+            name : "Triple Cheese American Veg Burger",
+            img : "https://images.mcdelivery.co.in/hardcastle-restaurants-pvt-ltd/image/upload/f_auto,q_auto,w_250/v1626342718/Item/5276.png",
+            price : 200,
+            des : "A crunchy Corn patty filled with Cheese, topped with Jalapenos, shredded Lettuce and more cheese, layered between our New Piri-Piri Buns."
+        },
+
+        {
+            name : "Triple Cheese American Chicken Burger",
+            img : "https://images.mcdelivery.co.in/hardcastle-restaurants-pvt-ltd/image/upload/f_auto,q_auto,w_250/v1626342713/Item/5275.png",
+            price : 200,
+            des : "A flame-grilled Chicken patty filled with Cheese, topped with Jalapenos, shredded Lettuce and more Cheese, layered between layered between freshly toasted Piri Piri Buns.."
+        },
+
+        {
+            name : "Chicken Dominator Pizza",
+            img : "https://images.dominos.co.in/4625-CMB1211.jpg",
+            price : 990,
+            des : "Large Chicken Dominator + 2 Garlic Bread + 2 Pepsi"
+        },
+
+        {
+            name : "Peppy Paneer Pizza",
+            img : "https://images.dominos.co.in/new_peppy_paneer.jpg",
+            price : 990,
+            des : "Flavorful trio of juicy paneer, crisp capsicum with spicy red paprika"
+        },
+
+        {
+            name : "Mingles Bucket Meal",
+            img : "https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/items/xl/A-33114-0.jpg?ver=1.10",
+            price : 500,
+            des : "Save Rs.55 on this combo of 4 Wings, 2 Chicken Strips, Reg Popcorn, Medium Fries & Pepsi PET [Serves 2]"
+        },
+    ];
+
+        localStorage.setItem("FoodDatas", JSON.stringify(foods))
+       var selected = document.querySelector("form").addEventListener("submit",selectedItem);
+        
+        
+function selectedItem(event) {
+    event.preventDefault();
+        var div = document.createElement("div");
+    //    var box1 = document.querySelector("#checkbox").checked;
+    //    var box2 = document.querySelector("#checkbox").checked;
+    //    var box3 = document.querySelector("#checkbox").checked;
+    //    var box4 = document.querySelector("#checkbox").checked;
+    //    var box5 = document.querySelector("#checkbox").checked;
+
+    var food = document.querySelector("form");
+    for (var i = 0; i < food.length;i++){
+        if (food[i].checked){
+           var selected = food[i].value;
+           //console.log(selected)
+       }
+    }
+      
+    //console.log(box2)
+        displayFoods(foods);
+       function displayFoods(foods){
+           document.querySelector("#displayFoods").textContent="";
+        foods.map(function (el){
+        //alert("Please wait your food is preparing")
+        var myPromise = new Promise(function (resolve){
+         setTimeout(function (){
+             //for (i = 0; i < foods.length;i++){
+            if ((el.name === selected)){
+                var name = document.createElement("h2");
+                name.textContent = el.name;
+                var img = document.createElement("img");
+                img.src = el.img;
+                var price = document.createElement("h3");
+                price.textContent = "₹" + el.price;
+                var des = document.createElement("p");
+                des.textContent = el.des;
+                var id = Math.floor(Math.random() * 100);
+                document.querySelector("#Idnum").textContent= "ID = " + id
+                
+                div.append(img,name,des,price)
+                document.querySelector("#displayFoods").append(div);
+                resolve("Please collect your food");
+            }
+
+ 
+            else {
+                reject("gvhgf")
+            }
+        //}
+         },5000)   
+         
+        });
+
+        myPromise.then(function(res){
+            alert(res)
+        })
+        myPromise.catch(function(res){
+            alert(res)
+        })
+
+
+    });
+       }
+
+}
+ 
+// }
+
+
+
+</script>
