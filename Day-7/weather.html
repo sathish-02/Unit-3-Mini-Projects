@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>weather</title>
+    <style>
+
+        body {
+            background-image: url('https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover; 
+        }
+        .header {
+           width: 100%;
+           height: 80px;
+           border-bottom: 1px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header > h1 {
+            margin-left: 10px;
+            color: white;
+        }
+
+        #search {
+            padding: 10px 30px;
+            width: 200px;
+            border-radius: 20px;
+            
+        }
+
+        #search:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            
+        }
+
+        
+        #submit {
+            padding: 10px 30px;
+            border-radius: 20px;
+            margin-right: 20px;
+        }
+
+        #submit:hover {
+            color: white;
+            background-color: blueviolet;
+            cursor: pointer;
+        }
+
+        #container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(12,1fr);
+            grid-gap: 20px;
+            padding: 20px;
+            grid-template-areas: 
+            "a a a a a b b b b b b b";
+        }
+        #WeatherDetails {
+            border: 1px solid gray;
+            border-radius: 20px;
+            
+        }
+
+        #WeatherDetails > div {
+            background-color: rgb(226, 177, 177);
+            border-radius: 20px;
+            padding-bottom: 10px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        #container > div:nth-child(1){
+            border: 1px solid transparent;
+            grid-area: a;
+            text-align: center;
+        }
+
+        #container > div:nth-child(2){
+            border: 1px solid transparent;
+            grid-area: b;
+        }
+        #image {
+            width: 20%;
+            height: 20%;
+            padding-bottom: 0%;
+            margin-bottom: 0%;
+        }
+        #WeatherDetails > div > h1 {
+            color: blue;
+            font-style: italic;
+        }
+
+        iframe {
+            width: 95%;
+            height: 100%;
+        }
+
+        #Mapdata {
+            width: 95%;
+            display: grid;
+            grid-template-columns: repeat(7,1fr);
+            grid-gap: 20px;
+            padding: 20px;
+            border: 1px solid transparent;
+            margin: auto;
+        }
+        #Mapdata > div {
+            border: 1px solid transparent;
+            text-align: center;
+            background-color: rgb(226, 177, 177);
+            border-radius: 10px;
+        }
+
+        #images {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+    <h1>Weather Forecating</h1>
+    <form id="form">
+        <input type="text" placeholder="Enter The City Name" id="search">
+        <input type="submit" id="submit">
+    </form>
+   </div>
+<div id="container">
+    <div id = "WeatherDetails">
+     
+        
+    </div>
+    <div id="map">
+        
+    </div>
+
+</div>
+
+<div id="Mapdata">
+    <!-- <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div> -->
+</div>
+
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit", getItems);
+    
+    function getItems(event){
+        event.preventDefault();
+        var input = document.querySelector("#search").value;
+        weatherDetails(input);
+        async function weatherDetails(input){
+            var res = await fetch("http://api.openweathermap.org/data/2.5/weather?q="+input+"&appid=8b4b8231f7b09ab70f943779e988b0ba&units=metric")
+            var data = await res.json();
+            displayWeather(data);
+            console.log(data);
+        }
+        daysweatherDetails(input);
+        async function daysweatherDetails(input){
+            var response = await fetch("https://api.openweathermap.org/data/2.5/forecast?q="+input+"&cnt=7&appid=0849f3afaed4176f88d83f1187ceb3eb")
+            var datas = await response.json();
+            daysdisplayWeather(datas);
+            console.log(datas);
+        }
+
+    }
+
+    function displayWeather(data){
+
+        document.querySelector("#WeatherDetails").textContent="";
+        var div = document.createElement("div");
+        var img = document.createElement("img");
+        img.src = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png";
+        img.setAttribute("id", "image")
+        var date = document.createElement("h4");
+        date.textContent= new Date();
+        var city = document.createElement("h1");
+        city.textContent=data.name;
+        var temp = document.createElement("h3");
+        temp.textContent= "Temperature : " + data.main.temp + "°C";
+        var humidity = document.createElement("h3");
+        humidity.textContent= "Humidity : " + data.main.humidity + "%";
+        var weather = document.createElement("h3");
+        weather.textContent= "Weather Condition : " + data.weather[0].description;
+        var ci = city.textContent;
+        console.log(ci)
+        document.querySelector("#map").textContent="";
+       var map = document.createElement("iframe");
+        map.src = "https://maps.google.com/maps?q="+ci+"&t=&z=13&ie=UTF8&iwloc=&output=embed"
+
+        document.querySelector("#map").append(map)
+
+        div.append(img,city,date,temp,humidity,weather);
+        document.querySelector("#WeatherDetails").append(div)
+    }
+
+    function daysdisplayWeather(datas){
+        
+        document.querySelector("#Mapdata").textContent="";
+        for (let i = 0; i < datas.list.length; i++){
+            
+            let weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            const d = new Date();
+            function checkDay(day){
+                if (day + d.getDay() > 6){
+                    return day + d.getDay()-7;
+                }
+                else {
+                    return day + d.getDay();
+                }
+            }
+            var div = document.createElement("div");
+            var date = document.createElement("h4");
+            date.textContent= weekday[checkDay(i)];
+            var temp = document.createElement("h3");
+            temp.textContent= datas.list[i].main.temp + "°C";
+            var humidity = document.createElement("h3");
+            humidity.textContent= datas.list[i].main.humidity + "%";
+            var weather = document.createElement("h3");
+            weather.textContent= datas.list[i].weather[0].description;
+            var img = document.createElement("img");
+            img.src = "http://openweathermap.org/img/w/"+ datas.list[i].weather[0].icon+".png";
+            img.setAttribute("id", "images");
+
+            
+            div.append(date,img,temp,humidity,weather);
+            document.querySelector("#Mapdata").append(div)
+        }
+
+        
+       
+    }
+
+</script>
