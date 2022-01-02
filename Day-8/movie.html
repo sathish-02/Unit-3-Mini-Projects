@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Movie</title>
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/920534/pexels-photo-920534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+            background-position: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+        }
+
+        form {
+            border: 1px solid transparent;
+            text-align: center;
+        }
+
+        #search {
+            padding: 10px 20px;
+            width:50%;
+            border-radius: 15px;
+        }
+
+        #submit {
+            padding: 10px 15px;
+            border-radius: 15px;
+        }
+
+        #submit:hover {
+            cursor: pointer;
+            color: white;
+            background-color: blue;
+        }
+
+        #display {
+            height: 300px;
+            border: 1px solid transparent;
+            padding: 10px 20px;
+            margin-left: 24%;
+            margin-right: 24%;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        #display::-webkit-scrollbar{
+            display: none;
+        }
+
+        #display > div{
+            padding: 2%;
+            height: 40%;
+            width: 100%;
+            display: flex;
+        }
+
+        #display > div > img {
+            height: 90%;
+            width: 40%;
+        }
+
+        #display > div > #title {
+            margin-left: 20px;
+        }
+
+        #title > h2 {
+            margin-bottom: 0%;
+        }
+
+        #title > h3 {
+            margin-top: 0%;
+        }
+
+        #displayMovies {
+            width: 80%;
+            margin: auto;
+            border: 1px solid transparent;
+            margin-top: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        #image {
+            width: 70%;
+            height: 700px;
+        }
+      
+    </style>
+</head>
+<body>
+    <form id="form">
+        <input oninput="debounce(getDetails, 3000)" type="text" placeholder="Enter The Movie Name" id="search">
+    </form>
+    <div id = "display">
+        <!-- <div>
+            <img src="https://m.media-amazon.com/images/M/MV5BMTMzMTg1MjgtOWNhYy00NmZmLWExOTctMjA2OTZhZDFkNDhhXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg" alt="">
+            <div id = "title">
+                <h2>title</h2>;
+                <h3>year</h3>
+            </div> -->
+    </div>
+
+    <div id="displayMovies">
+
+    </div>
+</body>
+</html>
+
+<script>
+    //document.querySelector("#search").addEventListener("oninput", getDetails);
+
+    function getDetails(){
+        var input = document.querySelector("#search").value;
+        console.log(input);
+        if (input.length > 2){
+            datas(input);
+        }
+        
+        async function datas(input){
+            try {
+                var res = await fetch("http://www.omdbapi.com/?apikey=6f0c2765&s="+input+"");
+                var datas = await res.json();
+                var movies = datas.Search;
+                displayItems(movies)
+                console.log(movies);
+            } catch (error) {
+                
+            }
+        }
+    }
+
+
+function displayItems(movies){
+        document.querySelector("#display").style.backgroundColor="white"
+        document.querySelector("#display").textContent="";
+            movies.map(function (el){
+                var div = document.createElement("div");
+                div.addEventListener("click",function (el){
+          
+          console.log(title.textContent)
+          var input2 = title.textContent;
+          apia();
+        async function apia(){
+            try {
+                
+                var response = await fetch("http://www.omdbapi.com/?apikey=6f0c2765&t="+input2+"")
+                //console.log(input)
+                var dataDes = await response.json();
+                //var moviedata = data.Search;
+                console.log(dataDes)
+
+                displayItemDes(dataDes);
+                
+                } catch (error) {
+                
+            }
+        }
+    
+        })
+
+                var img = document.createElement("img");
+                img.src = el.Poster;
+                var div1 = document.createElement("div");
+                div1.setAttribute("id","title");
+                var title = document.createElement("h2");
+                title.textContent= el.Title;
+                
+                var year = document.createElement("h3");
+                year.textContent= el.Year;
+
+                div1.append(title,year);
+                div.append(img,div1);
+                document.querySelector("#display").append(div);
+            })
+           
+}
+
+function displayItemDes(dataDes){
+       // console.log("here")
+       document.querySelector("#display").style.display="none"
+        document.querySelector("#displayMovies").textContent="";
+       
+        var div = document.createElement("div")
+
+        var actor = document.createElement("h3");
+        actor.textContent= "Actors : " + dataDes.Actors;
+
+        var award = document.createElement("h3");
+        award.textContent= "Awards : " + dataDes.Awards;
+
+        var country = document.createElement("h3");
+        country.textContent= "Country : " + dataDes.Country;
+
+        var director = document.createElement("h2");
+        director.textContent= "Director : " + dataDes.Director;
+
+        var lang = document.createElement("p");
+        lang.textContent= "Language : " + dataDes.Language;
+
+        var plot = document.createElement("p");
+        plot.textContent= "Plot : " + dataDes.Plot;
+
+        var Run = document.createElement("p");
+        Run.textContent= "Total Runtime : " + dataDes.Runtime;
+
+        var imdb = document.createElement("p");
+        imdb.setAttribute("id", "imdb")
+        imdb.textContent= "IMDB Rating : " + dataDes.imdbRating;
+        var x = dataDes.imdbRating
+        if (x >= 8.5){
+            //console.log(x)
+            document.querySelector("#imdb")
+            imdb.textContent= "IMDB Rating : " + ">" + dataDes.imdbRating;
+        }
+
+
+        var poster = document.createElement("img");
+        poster.src = dataDes.Poster;
+        poster.setAttribute("id","image")
+
+        var title = document.createElement("h2");
+        title.textContent= "Movie Title : " + dataDes.Title;
+
+        var year = document.createElement("h2");
+        year.textContent="Released Year : "+ dataDes.Year;
+
+      
+
+        div.append(poster,title,director,year,actor,award,country,lang,plot,Run,imdb);
+        document.querySelector("#displayMovies").append(div);
+    }
+
+    function debounce(func, delay){
+        setInterval(function (){
+            func();
+        },delay)
+    }
+
+
+
+</script>
