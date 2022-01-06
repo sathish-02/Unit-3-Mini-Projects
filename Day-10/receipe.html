@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Receipe</title>
+    <link rel="stylesheet" href="./navbar/style.css">
+
+    <style>
+        #display {
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-gap: 20px;
+            padding: 10px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        #display > div {
+            background-color: white;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        #display > div > img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        #display > div > h3 {
+            background-color: tomato;
+        }
+
+
+        #display1 {
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-gap: 20px;
+            padding: 10px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        #display1 > div {
+            background-color: white;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        #display1 > div > img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        #display1 > div > h3 {
+            background-color: tomato;
+        }
+
+        #heading {
+            text-align: center;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+      
+        <div class="container">
+
+        </div>
+
+        <div id="heading"><h1>Receipe Of The Day</h1></div>
+               
+        <div id="display">
+
+        </div>
+        
+</body>
+</html>
+
+<script type="module">
+      import navbar from "./navbar/navbar.js";
+      import {appendData,appendDatas} from "./navbar/apidata.js";
+
+      var container = document.querySelector(".container");
+    container.innerHTML= navbar();
+
+    var datas = document.querySelector("#display");
+
+      getApi()
+async function getApi(){
+    try {
+        var res = await fetch("https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian");
+        var data = await res.json();
+        var food = data.meals;
+        ///displayItem(food);
+        appendDatas(food,datas)
+        console.log(data)
+    } catch (error) {
+        
+    }
+}
+</script>
