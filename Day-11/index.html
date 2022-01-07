@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Mini Github</title>
+    <link rel="stylesheet" href="./components/index.css">
+    <style>
+        #display {
+            width: 60%;
+            margin: auto;
+            margin-top: 20px;
+            
+        }
+        #display > h1 {
+            text-align: center;
+            border-bottom: 1px solid gray;
+        }
+        
+        #display > div > h2 {
+            color: blue;
+            border-bottom: 1px solid gray;
+        }
+        #display > div > h3 {
+            color: blue;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+
+    <div id="display">
+        
+
+    </div>
+</body>
+</html>
+
+<script type="module">
+    import navbar from "./components/navbar.js";
+    import getapi from "./components/apidata.js"
+    var container = document.querySelector("#container");
+    container.innerHTML=navbar();
+
+    var input = document.querySelector("#search");
+    input.addEventListener("keypress", getdata);
+
+    function getdata(event){
+        if (event.key === "Enter"){
+            
+            var query = input.value;
+            console.log(query);
+            var res = getapi("https://api.github.com/users/"+query+"");
+
+          
+
+
+            
+            res.then((res)=>{
+                console.log(res);
+                getapi2(res.repos_url)
+                var img = document.querySelector("#image");
+                img.src = res.avatar_url;
+                //console.log(res.repos_url);
+            })
+        }
+    }
+
+    async function getapi2(data){
+        var res = getapi(data);
+            
+            res.then((res)=>{
+                console.log(res);
+                var h1 = document.createElement("h1");
+                h1.textContent = res.length + " " + "Repository";
+                document.querySelector("#display").append(h1);
+                appenditems(res);
+                
+                //console.log(res.repos_url);
+            })
+    }
+
+    function appenditems(res){
+        res.map((el)=> {
+            let {name,description} = el;
+            var div = document.createElement("div");
+            var Name = document.createElement("h2");
+            Name.textContent= name;
+            console.log(Name)
+            var des = document.createElement("h3");
+            des.textContent=description;
+            
+            div.append(Name,des);
+
+            document.querySelector("#display").append(div);
+        })
+    }
+
+
+
+</script>

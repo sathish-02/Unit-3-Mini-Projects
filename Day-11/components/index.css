@@ -1,0 +1,45 @@
+body {
+    margin: 0px;
+
+}
+.nav {
+    width: 100%;
+    border: 1px solid black;
+    background-color: black;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+.lhs {
+    width: 60%;
+    height: 100%;
+    border: 1px solid transparent;
+    display: flex;
+    gap: 5%;
+}
+
+div > input {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: transparent;
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.rhs {
+    width: 4%;
+    border: 1px solid transparent;
+    border-radius: 60%;
+    margin-right: 10px;
+}
+
+.rhs > img {
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 60%;
+}
