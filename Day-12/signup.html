@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Signup</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        #container {
+            width: 30%;
+            border: 1px solid black;
+            margin: auto;
+            margin-top: 7%;
+            background-color: rgb(170, 166, 166);
+            border-radius: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        label {
+            width: 100%;
+            font-size: 25px;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+        input {
+            width: 85%;
+            margin: 2%;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-right: 2%;
+        }
+        #SubmitBtn {
+            border-radius: 50px;
+            width: 40%;
+            padding: 10px 20px;
+            font-size: 15px;
+        }
+        #SubmitBtn:hover {
+        color: white;
+        background-color: blue;
+        cursor: pointer;
+        }
+
+        @media only screen and (min-width: 375px) and (max-width: 768px){
+            #container {
+            width: 65%;
+            margin-top: 15%;
+        }
+
+        label {
+            width: 100%;
+            font-size: 25px;
+            margin-left: 2%;
+        }
+        input {
+            width: 85%;
+            margin: 2%;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        } 
+
+        @media only screen and (min-width: 0px) and (max-width: 375px){
+            #container {
+            width: 95%;
+            margin-top: 15%;
+        }
+        } 
+
+    </style>
+</head>
+<body>
+    <form id="container">
+        <label>Name</label>
+        <input id="name" type="text">
+        <label>Mobile Number</label>
+        <input id="Mnum" type="number">
+        <label>Email Id</label>
+        <input id="Email"type="text">
+        <label>Password</label>
+        <input id="Password" type="password">
+        <label>User Name</label>
+        <input id="username" type="text">
+        <label>description</label>
+        <input id="Des" type="text">
+        <input id= "SubmitBtn" type="submit">
+    </form>
+</body>
+</html>
+
+<script>
+    document.querySelector("#container").addEventListener("submit",login);
+
+    async function login(event){
+        event.preventDefault();
+        try {
+            var registered_data = {
+                name : document.querySelector("#name").value,
+                email : document.querySelector("#Email").value,
+                password : document.querySelector("#Password").value,
+                username : document.querySelector("#username").value,
+                mobile : document.querySelector("#Mnum").value,
+                description : document.querySelector("#Des").value,
+            }
+            registered_data = JSON.stringify(registered_data);
+            console.log(registered_data)
+        } catch (error) {
+            console.log(error);
+            alert("Registeration Failed")
+        }
+
+        let url = "https://masai-api-mocker.herokuapp.com/auth/register";
+        try {
+            let response = await fetch(url, {
+            method: "POST",
+            body : registered_data,
+            headers: {
+                "Content-Type" : "application/json",
+            }
+        });
+        let data = await response.json();
+        console.log(data);
+        if (data.error === true){
+                alert("Registration failed, user already exists");
+            }
+            else {
+                alert("Registration succesfull");
+                window.location.href="index.html"
+            }
+        } catch (error) {
+            
+        }
+      
+    }
+</script>

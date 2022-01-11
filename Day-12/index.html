@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>home page</title>
+    <link rel="stylesheet" href="./navbar/style.css">
+    <style>
+
+        body > #maindiv {
+            width: 100%;
+            height: 450px;
+            border: 1px solid black;
+            background-image: url("https://images.pexels.com/photos/4139815/pexels-photo-4139815.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 20px;
+            
+        }
+        .container1 {
+        width: 100%;
+        display: flex;  
+        justify-content: space-between;
+        border: 1px solid transparent;
+        align-items: center;
+        }
+
+        #heading {
+            width: 50%;
+            margin-left: 1%;
+            color: white;
+            font-size: 30px;
+            font-style: italic;
+        }
+
+        .popular {
+            border: 1px solid transparent;
+            color: rgb(241, 13, 13);
+            text-decoration: underline;
+        }
+
+        #display {
+            width: 95%;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-gap: 20px;
+            padding: 10px;
+            margin: auto;
+        }
+
+        #display > div {
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        #display > div > img {
+            width: 100%;
+        }
+
+        #display > div > h2 {
+            background-color: tomato;
+            text-align: center;
+        }
+
+        #display > div > p {
+            margin-left: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id= "maindiv">
+        
+        <div class="container">
+
+        </div>
+        <div class="container1">
+            <div id="heading">
+                <h1>Cooking is about creating something delicious for you.....</h1>
+            </div>
+            <div class="popular">
+                <a href="receipe.html"><h1>Click Here to Get Receipe Of The Day!</h1></a>
+                <a href="random.html"><h1>Click Here to Random Receipes</h1></a>
+            </div>
+        </div>
+       
+    </div>
+
+    <h1>Food Categories</h1>
+    <div id="display">
+    
+    </div>
+    
+
+    
+</body>
+</html>
+
+<script type="module">
+    import navbar from "./navbar/navbar.js";
+    import {getApi,appendData} from "./navbar/apidata.js";
+    //console.log(getApi);
+    var container = document.querySelector(".container");
+    container.innerHTML= navbar();
+
+    var data = document.querySelector("#display");
+    var response = getApi("https://www.themealdb.com/api/json/v1/1/categories.php");
+    //console.log(response);
+    response.then((res)=> {
+        //console.log(res)
+        appendData(res,data)
+    });
+    response.catch((err)=>{
+        console.log(err);
+    });
+
+    document.querySelector("#nav > div > button").addEventListener("click",searchResult);
+
+    function searchResult(event){
+        event.preventDefault();
+        var input = document.querySelector("#nav > div > input").value;
+        var searchResult = [];
+        searchResult.push(input);
+        localStorage.setItem("searchResult", JSON.stringify(searchResult));
+        //console.log("here")
+        window.location.href="search.html"
+
+    }
+
+
+
+
+</script>;
+
