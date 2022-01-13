@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    div {
+      width: 13%;
+    }
+    input,
+    button {
+      margin-top: 10px;
+    }
+  </style>
+  <body>
+    <div>
+      <h1>Add Product</h1>
+      <input type="number" placeholder="id" id="id" />
+
+      <input type="name" placeholder="name" id="name" />
+
+      <input type="number" placeholder="price" id="price" />
+
+      <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <div>
+      <h1>Delete Product</h1>
+
+      <input type="text" id="delete_id" placeholder="Enter id to Delete" />
+
+      <button onclick="deleteProduct()">Delete Product</button>
+    </div>
+    <div>
+      <h1>Update Product</h1>
+      <input type="name" placeholder="name" id="UPname" />
+
+      <input type="number" placeholder="price" id="UPprice" />
+
+      <input type="text" id="update_id" placeholder="Enter id to Update" />
+
+      <button onclick="updateProduct()">Update Product</button>
+    </div>
+  </body>
+</html>
+<script>
+  async function addProduct(){
+    try {
+      var addData = {
+      id : document.querySelector("#id").value,
+      name : document.querySelector("#name").value,
+      number : document.querySelector("#price").value,
+    }
+
+    addData = JSON.stringify(addData);
+    } catch (error) {
+      console.log(error);
+    }
+   
+    var response = await fetch("http://127.0.0.1:4000/api/products", {
+      method : "POST",
+      body : addData,
+      headers : {
+        "Content-Type" : "application/json",
+      }
+    })
+
+    var data = await response.json();
+    console.log(data);
+  }
+
+  async function deleteProduct(){
+    
+    try {
+      var input = document.querySelector("#delete_id").value;
+      let response = await fetch("http://127.0.0.1:4000/api/products/"+input+"",{
+        method : "DELETE",
+        headers : {
+        "Content-Type" : "application/json",
+      }
+      });
+      let data = await response.json();
+    } catch (error) {
+      
+    }
+  }
+
+  async function updateProduct(){
+    
+    try {
+      let updateData = {
+      name : document.querySelector("#UPname").value,
+      number : document.querySelector("#UPprice").value,
+    }
+
+    updateData = JSON.stringify(updateData)
+      var input = document.querySelector("#update_id").value;
+      let response = await fetch("http://127.0.0.1:4000/api/products/"+input+"",{
+        method : "PUT",
+        body : updateData,
+        
+        headers : {
+        "Content-Type" : "application/json",
+      }
+      });
+      let data = await response.json();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+</script>
